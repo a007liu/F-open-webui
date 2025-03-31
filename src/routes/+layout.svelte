@@ -491,7 +491,7 @@
 		if (backendConfig) {
 			// Save Backend Status to Store
 			await config.set(backendConfig);
-			await WEBUI_NAME.set(backendConfig.name);
+			await WEBUI_NAME.set('富奥智慧AI助手');
 
 			if ($config) {
 				await setupSocket($config.features?.enable_websocket ?? true);
