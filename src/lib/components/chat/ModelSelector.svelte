@@ -46,7 +46,8 @@
 							model: model
 						}))}
 						showTemporaryChatControl={$user.role === 'user'
-							? ($user?.permissions?.chat?.temporary ?? true)
+							? ($user?.permissions?.chat?.temporary ?? true) &&
+								!($user?.permissions?.chat?.temporary_enforced ?? false)
 							: true}
 						bind:value={selectedModel}
 					/>
@@ -113,7 +114,6 @@
 {#if showSetDefault}
 	<div
 		class=" absolute text-left mt-[1px] ml-1 text-[0.7rem] text-gray-500 font-primary"
-		style="top: 34px;"
 	>
 		<button on:click={saveDefaultModel}> {$i18n.t('Set as default')}</button>
 	</div>
