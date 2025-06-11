@@ -236,35 +236,6 @@
 	<div class="  overflow-y-scroll max-h-[28rem] lg:max-h-full">
 		<div class="">
 			<div class=" mb-1 text-sm font-medium">{$i18n.t('WebUI Settings')}</div>
-			<div class=" flex w-full justify-between">
-				<div class=" self-center text-xs font-medium">{$i18n.t('Language')}</div>
-				<div class="flex items-center relative">
-					<select
-						class=" dark:bg-gray-900 w-fit pr-8 rounded-sm py-2 px-2 text-xs bg-transparent outline-hidden text-right"
-						bind:value={lang}
-						placeholder="Select a language"
-						on:change={(e) => {
-							changeLanguage(lang);
-						}}
-					>
-						{#each languages as language}
-							<option value={language['code']}>{language['title']}</option>
-						{/each}
-					</select>
-				</div>
-			</div>
-			{#if $i18n.language === 'en-US'}
-				<div class="mb-2 text-xs text-gray-400 dark:text-gray-500">
-					Couldn't find your language?
-					<a
-						class=" text-gray-300 font-medium underline"
-						href="https://github.com/open-webui/open-webui/blob/main/docs/CONTRIBUTING.md#-translations-and-internationalization"
-						target="_blank"
-					>
-						Help us translate Open WebUI!
-					</a>
-				</div>
-			{/if}
 
 			<div>
 				<div class=" py-0.5 flex w-full justify-between">
@@ -287,15 +258,16 @@
 			</div>
 		</div>
 
-		{#if $user.role === 'admin' || $user?.permissions.chat?.controls}
-			<hr class="border-gray-100 dark:border-gray-850 my-3" />
+		{#if $user?.role === 'admin' || $user?.permissions.chat?.controls}
+			<hr class="border-gray-50 dark:border-gray-850 my-3" />
 
 			<div>
 				<div class=" my-2.5 text-sm font-medium">{$i18n.t('System Prompt')}</div>
-				<textarea
+				<Textarea
 					bind:value={system}
-					class="w-full rounded-lg p-4 text-sm bg-white dark:text-gray-300 dark:bg-gray-850 outline-hidden resize-none"
+					className="w-full text-sm bg-white dark:text-gray-300 dark:bg-gray-900 outline-hidden resize-none"
 					rows="4"
+					placeholder={$i18n.t('Enter system prompt here')}
 				/>
 			</div>
 
@@ -337,7 +309,7 @@
 						{#if keepAlive !== null}
 							<div class="flex mt-1 space-x-2">
 								<input
-									class="w-full rounded-lg py-2 px-4 text-sm dark:text-gray-300 dark:bg-gray-850 outline-hidden"
+									class="w-full text-sm dark:text-gray-300 dark:bg-gray-850 outline-hidden"
 									type="text"
 									placeholder={$i18n.t("e.g. '30s','10m'. Valid time units are 's', 'm', 'h'.")}
 									bind:value={keepAlive}
@@ -377,7 +349,7 @@
 						{#if requestFormat !== null}
 							<div class="flex mt-1 space-x-2">
 								<Textarea
-									className="w-full rounded-lg py-2 px-4 text-sm dark:text-gray-300 dark:bg-gray-850 outline-hidden"
+									className="w-full  text-sm dark:text-gray-300 dark:bg-gray-900 outline-hidden"
 									placeholder={$i18n.t('e.g. "json" or a JSON schema')}
 									bind:value={requestFormat}
 								/>

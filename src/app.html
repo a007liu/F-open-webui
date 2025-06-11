@@ -85,11 +85,11 @@
 
 					darkImage.onload = () => {
 						logo.src = '/static/logo-ai.png';
-						logo.style.filter = ''; // Ensure no inversion is applied if splash-dark.png exists
+						logo.style.filter = ''; // Ensure no inversion is applied if logo.png exists
 					};
 
 					darkImage.onerror = () => {
-						logo.style.filter = 'invert(1)'; // Invert image if splash-dark.png is missing
+						logo.style.filter = 'invert(1)'; // Invert image if logo.png is missing
 					};
 				}
 			}

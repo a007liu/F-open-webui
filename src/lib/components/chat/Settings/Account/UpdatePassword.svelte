@@ -10,7 +10,18 @@
 	let newPassword = '';
 	let newPasswordConfirm = '';
 
+    const regex = /^(?=.*[0-9])(?=.*[a-zA-Z])(.{8,20})$/;
+
 	const updatePasswordHandler = async () => {
+        // 先校验密码强度
+        if (!regex.test(newPassword)) {
+            toast.error('密码需为8-20位，包含字母和数字！');
+            newPassword = '';
+            newPasswordConfirm = '';
+            return;
+        }
+
+         // 再校验两次是否一致
 		if (newPassword === newPasswordConfirm) {
 			const res = await updateUserPassword(localStorage.token, currentPassword, newPassword).catch(
 				(error) => {
@@ -28,7 +39,7 @@
 			newPasswordConfirm = '';
 		} else {
 			toast.error(
-				`The passwords you entered don't quite match. Please double-check and try again.`
+				`两次输入的密码不一致，请重新输入！`
 			);
 			newPassword = '';
 			newPasswordConfirm = '';
@@ -67,6 +78,7 @@
 						autocomplete="current-password"
 						required
 					/>
+
 				</div>
 			</div>
 
