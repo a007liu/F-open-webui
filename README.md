@@ -20,7 +20,7 @@ server {
         }
     }
 ```
-
+1
 * 启动nginx
 * 修改constants端口为 8888
 * 启动后台 `open-webui serve`
