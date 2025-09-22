@@ -1,9 +1,9 @@
 {
-  "name": "Open WebUI",
-  "short_name": "WebUI",
+  "name": "Fawer AI",
+  "short_name": "Fawer AI",
   "icons": [
     {
-      "src": "/static/logo.png",
+      "src": "/static/web-app-manifest-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "maskable"

@@ -2,6 +2,7 @@
 	import { getContext } from 'svelte';
 	import { toast } from 'svelte-sonner';
 	import { updateUserPassword } from '$lib/apis/auths';
+	import SensitiveInput from '$lib/components/common/SensitiveInput.svelte';
 
 	const i18n = getContext('i18n');
 
@@ -10,18 +11,7 @@
 	let newPassword = '';
 	let newPasswordConfirm = '';
 
-    const regex = /^(?=.*[0-9])(?=.*[a-zA-Z])(.{8,20})$/;
-
 	const updatePasswordHandler = async () => {
-        // 先校验密码强度
-        if (!regex.test(newPassword)) {
-            toast.error('密码需为8-20位，包含字母和数字！');
-            newPassword = '';
-            newPasswordConfirm = '';
-            return;
-        }
-
-         // 再校验两次是否一致
 		if (newPassword === newPasswordConfirm) {
 			const res = await updateUserPassword(localStorage.token, currentPassword, newPassword).catch(
 				(error) => {
@@ -39,7 +29,7 @@
 			newPasswordConfirm = '';
 		} else {
 			toast.error(
-				`两次输入的密码不一致，请重新输入！`
+				$i18n.t("The passwords you entered don't quite match. Please double-check and try again.")
 			);
 			newPassword = '';
 			newPasswordConfirm = '';
@@ -70,15 +60,14 @@
 				<div class=" mb-1 text-xs text-gray-500">{$i18n.t('Current Password')}</div>
 
 				<div class="flex-1">
-					<input
-						class="w-full bg-transparent dark:text-gray-300 outline-hidden placeholder:opacity-30"
+					<SensitiveInput
+						class="w-full bg-transparent text-sm dark:text-gray-300 outline-hidden placeholder:opacity-30"
 						type="password"
 						bind:value={currentPassword}
 						placeholder={$i18n.t('Enter your current password')}
 						autocomplete="current-password"
 						required
 					/>
-
 				</div>
 			</div>
 
@@ -86,7 +75,7 @@
 				<div class=" mb-1 text-xs text-gray-500">{$i18n.t('New Password')}</div>
 
 				<div class="flex-1">
-					<input
+					<SensitiveInput
 						class="w-full bg-transparent text-sm dark:text-gray-300 outline-hidden placeholder:opacity-30"
 						type="password"
 						bind:value={newPassword}
@@ -101,7 +90,7 @@
 				<div class=" mb-1 text-xs text-gray-500">{$i18n.t('Confirm Password')}</div>
 
 				<div class="flex-1">
-					<input
+					<SensitiveInput
 						class="w-full bg-transparent text-sm dark:text-gray-300 outline-hidden placeholder:opacity-30"
 						type="password"
 						bind:value={newPasswordConfirm}
