@@ -405,8 +405,7 @@ from open_webui.config import (
     AppConfig,
     reset_config,
 )
-from open_webui.env
- import (
+from open_webui.env import (
     LICENSE_KEY,
     AUDIT_EXCLUDED_PATHS,
     AUDIT_LOG_LEVEL,
